@@ -10,9 +10,12 @@
     <script type="text/javascript" src="../osql.js"></script>
 
     <script>
+        var x;
+
         $().ready(function () {
-                execSelect();
-            });
+            x = 0;
+            setInterval(execSelect,2000);
+        });
 
         function button2Pressed() {
             doInsert();
