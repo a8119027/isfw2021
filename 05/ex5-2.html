@@ -10,13 +10,17 @@
     <script type="text/javascript" src="../osql.js"></script>
 
     <script>
+        $().ready(function () {
+                execSelect();
+            });
+
         function button2Pressed() {
             doInsert();
         }
 
-        function button1Pressed(){
-            execSelect();
-        }
+        // function button1Pressed(){
+        //     execSelect();
+        // }
 
         async function doInsert() {
             var userid = document.getElementById('tf1').value;
