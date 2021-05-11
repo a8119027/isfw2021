@@ -10,32 +10,37 @@
     <script type="text/javascript" src="../osql.js"></script>
 
     <script>
-        function button1Pressed() {
-            doSelect();
-        }
-
-        async function doSelect() {
-            var sql = "select * from Tweets WHERE Tweet LIKE 'できました'";
-            var objects = await osql.connect(sql);
-            console.log(objects);
-            var html = '';
-            html = html + '<ul>';
-            for (var i = 0; i < objects.length; i++) {
-                var object = objects[i];
-                html = html + '<li>' + object.name +','+object.tweet +','+ object.time + '</li>'
+        
+            function button1Pressed() {
+                doSelect();
             }
-            html = html + '</ul>';
-            document.getElementById('result').innerHTML = html;
-        }
+
+            async function doSelect() {
+                var word = document.getElementById('textfield1').value;
+                var sql = `select * from Tweets WHERE Tweet LIKE "${word}"`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<ul>';
+                for (var i = 0; i < objects.length; i++) {
+                    var object = objects[i];
+                    html = html + '<li>' + object.name + ',' + object.tweet + ',' + object.time + '</li>'
+                }
+                html = html + '</ul>';
+                document.getElementById('result').innerHTML = html;
+            }
+        
     </script>
 
 </head>
 
 <body>
     <h1>Tweets</h1>
+    <span>検索ワード</span>
+    <input type="text" id="textfield1">
     <button onclick="button1Pressed()">X</button>
     <hr>
-    <p id="result">xxxx</p>
+    <p id="result">検索結果</p>
 </body>
 
 </html>
