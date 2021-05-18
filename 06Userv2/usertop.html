@@ -14,9 +14,16 @@
             init();
         });
 
+        var id = sessionStorage.getItem('userid');
+        var html = "?userid=" + id;
+        
+
         function init(){
-            var name = osql.getParam('username');
-            document.getElementById('welcome').innerHTML='ようこそ' + name + 'さん';
+            var name = sessionStorage.getItem('username');
+            
+            document.getElementById('welcome').innerHTML='ようこそ' + name + 'さん' + 
+            '<br><a href="update.html' + html + '">ユーザー情報変更</a>';
+            
         }
     </script>
 
@@ -25,6 +32,7 @@
 <body>
     <h1>ユーザトップ</h1>
     <p id="welcome">ようこそ</p>
+    
     <hr>
 
 </body>
