@@ -15,14 +15,15 @@
         });
 
         var id = sessionStorage.getItem('userid');
-        var html = "?userid=" + id;
+        var addHtml = "?userid=" + id;
         
 
         function init(){
             var name = sessionStorage.getItem('username');
             
-            document.getElementById('welcome').innerHTML='ようこそ' + name + 'さん' + 
-            '<br><a href="update.html' + html + '">ユーザー情報変更</a>';
+            document.getElementById('welcome').innerHTML='ようこそ' + name + 'さん' 
+            document.getElementById('result').innerHTML=
+            '<br><a href="update.html' + addHtml + '">ユーザー情報変更</a>';
             
         }
     </script>
@@ -32,8 +33,10 @@
 <body>
     <h1>ユーザトップ</h1>
     <p id="welcome">ようこそ</p>
-    
     <hr>
+    <p id = "result">xx</p>
+    <a href="Twitter.html">Tweet</a>
+
 
 </body>
 
