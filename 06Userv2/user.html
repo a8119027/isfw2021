@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../settings.js"></script>
+    <script type="text/javascript" src="../osql.js"></script>
+
+    <script>
+        var userid = sessionStorage.getItem('userid');
+
+        $(document).ready(function () {
+            execSelect();
+        });
+
+        async function button1Pressed(fromid,toid) {
+            var sql = `insert into Follows values("${fromid}", "${toid}");`;
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            document.getElementById("completeFollow").innerHTML = toid + 'をフォローしました';
+        }
+
+        async function button2Pressed(fromid,toid){
+            var sql = `delete from Follows where fromid="${fromid}" AND toid="${toid}";`;
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            document.getElementById("completeFollow").innerHTML = toid + 'のフォローをやめました';
+        }
+
+        async function execSelect() {
+            var sql = 'select * from Users';
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            var html = '';
+            html = html + '<table border="1">';
+            for (var i = 0; i < objects.length; i++) {
+                html = html + '<tr>';
+                var object = objects[i];
+                html = html + '<td>' + object.id + '</td>';
+                html = html + '<td>' + object.name + '</td>';
+                html = html + '<td>' + `<button onclick="butto1Pressed('${userid}' , '${object.id}')">フォローする</button>` + '</td>';
+                html = html + '<td>' + `<button onclick="button2Pressed('${userid}' , '${object.id}')">フォローをやめる</button>` +'</td>';
+                html = html + '</tr>';
+            }
+
+            html = html + '</table>';
+            document.getElementById('result').innerHTML = html;
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+    <h1>Users</h1>
+    <p id="completeFollow"></p>
+    <p id="result">xxxx</p>
+
+</body>
+
+</html>
